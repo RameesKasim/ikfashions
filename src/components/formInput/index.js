@@ -41,20 +41,29 @@ export const renderPhone = ({ field, form, ...props }) => {
 };
 
 export const renderSelect = ({ field, form, ...props }) => {
+  // console.log(props, field, form);
+
   return (
     <Fragment>
       <Select
         labelId="demo-simple-select-helper-label"
         id="demo-simple-select-helper"
         variant="outlined"
-        {...props}
+        value={field.value}
+        className={props.className}
+        onChange={(event) => {
+          form.setFieldValue(field.name, event.target.value);
+        }}
       >
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value={"suits"}>Suits</MenuItem>
+        <MenuItem value={"blazers"}>Blazers</MenuItem>
+        <MenuItem value={"pants"}>Pants</MenuItem>
+        <MenuItem value={"shirts"}>Shirts</MenuItem>
+        <MenuItem value={"bow-ties"}>Bow-Ties</MenuItem>
+        <MenuItem value={"vests"}>Vests</MenuItem>
       </Select>
     </Fragment>
   );

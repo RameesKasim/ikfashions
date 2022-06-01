@@ -60,7 +60,7 @@ function App() {
           fontSize: ".8rem",
         },
         "@media (min-width:900px)": {
-          fontSize: "1rem",
+          fontSize: "1.2rem",
         },
         "@media (min-width:1200px)": {
           fontSize: "1.5rem",

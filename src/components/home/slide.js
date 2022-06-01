@@ -10,6 +10,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  DialogContentText,
   Grid,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -19,6 +20,7 @@ import { renderInput, renderPhone, renderSelect } from "../formInput";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 import "yup-phone";
+import { post } from "../utils/apiController";
 
 const Slide = () => {
   const settings = {
@@ -32,9 +34,32 @@ const Slide = () => {
   };
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [modelOpen, setModelOpen] = useState(false);
+  const [name, setName] = useState(null);
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleModalClose = () => {
+    setModelOpen(false);
+  };
+
+  const handleSubmit = async (values, actions) => {
+    let formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("phone", values.phone);
+    formData.append("email", values.email);
+    formData.append("apparel", values.apparel);
+    await post(`addAppoinment`, formData)
+      .then((res) => {
+        handleClose();
+        setName(values.name);
+        setModelOpen(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const appoinmentSchema = Yup.object().shape({
@@ -93,24 +118,32 @@ const Slide = () => {
           </Box>
         </div>
       </Slider>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        disableEscapeKeyDown={true}
+        onClose={(_, reason) => {
+          if (reason !== "backdropClick") {
+            handleClose();
+          }
+        }}
+      >
         <DialogTitle>Book Appointment</DialogTitle>
-        <DialogContent>
-          <Formik
-            initialValues={{
-              name: "",
-              phone: "",
-              email: "",
-              apparelType: "",
-            }}
-            validationSchema={appoinmentSchema}
-            onSubmit={(values, actions) => {
-              // handleLogin(values.username, values.password);
-              actions.setSubmitting(false);
-            }}
-          >
-            {(errors, props) => (
-              <Form>
+        <Formik
+          initialValues={{
+            name: "",
+            phone: "",
+            email: "",
+            apparel: "",
+          }}
+          validationSchema={appoinmentSchema}
+          onSubmit={(values, actions) => {
+            handleSubmit(values, actions);
+            actions.setSubmitting(true);
+          }}
+        >
+          {(errors, props) => (
+            <Form>
+              <DialogContent>
                 <Grid container className={classes.formWrapper}>
                   <Grid item xs={4}>
                     <div>Name :</div>
@@ -173,18 +206,44 @@ const Slide = () => {
                   <Grid item xs={8}>
                     <Field
                       name="apparel"
+                      type="text"
                       className={classes.formControlSelect}
                       component={renderSelect}
                     ></Field>
                   </Grid>
                 </Grid>
-              </Form>
-            )}
-          </Formik>
+              </DialogContent>
+              <DialogActions>
+                <Button variant="outlined" onClick={handleClose}>
+                  Cancel
+                </Button>
+                <Button variant="outlined" type="submit">
+                  Book Appointment
+                </Button>
+              </DialogActions>
+            </Form>
+          )}
+        </Formik>
+      </Dialog>
+      <Dialog
+        open={modelOpen}
+        disableEscapeKeyDown={true}
+        onClose={(_, reason) => {
+          if (reason !== "backdropClick") {
+            handleModalClose();
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogContentText>
+            Thanks {name} for booking appointment. <br />
+            Our tailor will contact you soon
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button variant="outlined" onClick={handleModalClose} autoFocus>
+            OK
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
