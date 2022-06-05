@@ -33,6 +33,7 @@ const Apparel = () => {
             <div key={key}>
               <div className={classes.apparelMobile}>
                 <img
+                  alt={item.title}
                   src={item.image}
                   style={{ width: "100%", height: "500px" }}
                 />
@@ -69,7 +70,11 @@ const Apparel = () => {
               className={classes.apparel}
             >
               <div className={classes.imageWrapper}>
-                <img src={item.image} className={classes.apperalImage} />
+                <img
+                  alt={item.title}
+                  src={item.image}
+                  className={classes.apperalImage}
+                />
               </div>
               <div className={classes.textWrapper}>
                 <Typography variant="h3">{item.title}</Typography>
@@ -142,7 +147,7 @@ const useStyles = makeStyles({
       "&:hover": {
         border: "1px solid white",
         color: "white",
-        background: "#888888",
+        background: "rgb(6 28 50) ",
       },
       "&::after": {
         position: "absolute",
@@ -151,7 +156,7 @@ const useStyles = makeStyles({
         left: "0",
         width: "0",
         height: "100%",
-        backgroundColor: "#888888",
+        backgroundColor: "rgb(6 28 50) ",
         transformOrigin: "left",
         transition: "width 0.25s ease",
         zIndex: "-1",
@@ -166,7 +171,7 @@ const useStyles = makeStyles({
     left: "15%",
     bottom: "0",
     "& h3": {
-      color: "#888888",
+      color: "rgb(6 28 50) ",
       marginBottom: "10px",
     },
     "& button": {
@@ -176,7 +181,7 @@ const useStyles = makeStyles({
       "&:hover": {
         border: "1px solid white",
         color: "white",
-        background: "#888888",
+        background: "rgb(6 28 50) ",
       },
       "&::after": {
         position: "absolute",
@@ -185,7 +190,7 @@ const useStyles = makeStyles({
         left: "0",
         width: "0",
         height: "100%",
-        backgroundColor: "#888888",
+        backgroundColor: "rgb(6 28 50) ",
         transformOrigin: "left",
         transition: "width 0.25s ease",
         zIndex: "-1",

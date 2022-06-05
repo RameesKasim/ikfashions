@@ -133,7 +133,11 @@ const Shirts = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} sm={5} className={classes.imageWrapper}>
-              <img src={item.image} className={classes.shirtImage} />
+              <img
+                alt={item.title}
+                src={item.image}
+                className={classes.shirtImage}
+              />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}
@@ -170,7 +174,11 @@ const Shirts = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} className={classes.imageWrapper}>
-              <img src={item.image} className={classes.collarImage} />
+              <img
+                alt={item.title}
+                src={item.image}
+                className={classes.collarImage}
+              />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}

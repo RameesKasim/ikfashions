@@ -55,7 +55,7 @@ const Pants = () => {
 
   return (
     <Grid container className={classes.pantsWrapper}>
-      <Loader/>
+      <Loader />
       {PantData.map((item, key) => (
         <Grid
           item
@@ -70,7 +70,7 @@ const Pants = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} className={classes.imageWrapper}>
-              <img src={item.image} />
+              <img alt={item.title} src={item.image} />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}
@@ -93,7 +93,6 @@ const Pants = () => {
                   item
                   xs={item.features.length > 1 ? 11 : 10}
                   sm={item.features.length > 1 ? 13 : 11}
-                  sm={item.features.length > 1 ? 11 : 10}
                 >
                   <Typography
                     variant="body2"

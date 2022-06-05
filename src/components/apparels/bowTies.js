@@ -118,7 +118,11 @@ const BowTies = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} sm={5} className={classes.imageWrapper}>
-              <img src={item.image} className={classes.shirtImage} />
+              <img
+                alt={item.title}
+                src={item.image}
+                className={classes.shirtImage}
+              />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}
@@ -155,7 +159,11 @@ const BowTies = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} className={classes.imageWrapper}>
-              <img src={item.image} className={classes.collarImage} />
+              <img
+                alt={item.title}
+                src={item.image}
+                className={classes.collarImage}
+              />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}
@@ -184,7 +192,11 @@ const BowTies = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} lg={6} className={classes.tieingImageWrapper}>
-          <img src={tieingBowTie} style={{ width: "90%" }} />
+          <img
+            alt="Tieing a Bow-Tie"
+            src={tieingBowTie}
+            style={{ width: "90%" }}
+          />
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body2">
@@ -201,7 +213,11 @@ const BowTies = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} lg={6} sx={{ textAlign: "center" }}>
-          <img src={fittingBowTie} className={classes.fittingImage} />
+          <img
+            alt="Boe-Tie Fit"
+            src={fittingBowTie}
+            className={classes.fittingImage}
+          />
         </Grid>
         <Grid item xs={12} lg={6}>
           <Typography variant="body2">

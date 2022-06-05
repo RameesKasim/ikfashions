@@ -1,9 +1,6 @@
 import "./App.css";
-import { ThemeProvider, createTheme, CircularProgress } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import Router from "./components/router/router";
-import NavBar from "./components/navBar";
-import Footer from "./components/footer";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
   let theme = createTheme({
@@ -127,7 +124,7 @@ function App() {
       },
     },
     palette: {
-      primary: { main: "#acb9be" },
+      primary: { main: "rgb(0, 30, 60)" },
       secondary: { main: "#ffff" },
     },
   });

@@ -68,7 +68,11 @@ const Vests = () => {
         </Typography>
       </Grid>
       <Grid item container xs={12} lg={6} sx={{ justifyContent: "center" }}>
-        <img src={vestvsWaistCoat} className={classes.headImage} />
+        <img
+          alt="waist and vest difference"
+          src={vestvsWaistCoat}
+          className={classes.headImage}
+        />
       </Grid>
       {vestData.map((item, key) => (
         <Grid
@@ -84,7 +88,7 @@ const Vests = () => {
           </Grid>
           <Grid container item xs={12} className={classes.descWRapper}>
             <Grid item xs={6} className={classes.imageWrapper}>
-              <img src={item.image} />
+              <img alt={item.title} src={item.image} />
             </Grid>
             <Grid item xs={6} className={classes.textWrapper}>
               {item.desc.split("\n").map(renderParagraph, key)}
@@ -138,7 +142,11 @@ const Vests = () => {
           lg={5}
           className={classes.vestFitImageWrapper}
         >
-          <img src={vestFitting} style={{ width: "90%" }} />
+          <img
+            alt="Fitting a Vest"
+            src={vestFitting}
+            style={{ width: "90%" }}
+          />
         </Grid>
       </Grid>
       <Grid item md={12}>
@@ -201,8 +209,16 @@ const Vests = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={12} lg={5}>
-          <img src={singleBreastedVestFront} style={{ width: "90%" }} />
-          <img src={doubleBreastedVestFront} style={{ width: "90%" }} />
+          <img
+            alt="single Breasted Vest Front"
+            src={singleBreastedVestFront}
+            style={{ width: "90%" }}
+          />
+          <img
+            src={doubleBreastedVestFront}
+            alt="double Breasted Vest Front"
+            style={{ width: "90%" }}
+          />
         </Grid>
       </Grid>
       <Grid item xs={12} container>
@@ -228,7 +244,11 @@ const Vests = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={6} lg={5}>
-          <img src={fitVestBack} style={{ width: "90%" }} />
+          <img
+            alt="fitting a Vest"
+            src={fitVestBack}
+            style={{ width: "90%" }}
+          />
         </Grid>
       </Grid>
     </Grid>

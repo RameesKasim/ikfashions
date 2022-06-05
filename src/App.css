@@ -39,3 +39,49 @@ h4::after {
   border-top: 1px solid;
   border-color: #828282;
 }
+
+.MuiOutlinedInput-root {
+  padding: 0 0.5rem !important;
+}
+
+body::-webkit-scrollbar {
+  width: 3px;
+}
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(71, 75, 99, 1);
+}
+
+.MuiDialog-paperScrollPaper::-webkit-scrollbar {
+  width: 3px !important;
+}
+.MuiDialog-paperScrollPaper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.MuiDialog-paperScrollPaper::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(71, 75, 99, 1) !important;
+}
+
+.MuiPopover-paper {
+  height: 200px;
+  overflow: scroll;
+}
+
+.MuiPopover-paper::-webkit-scrollbar {
+  width: 3px !important;
+}
+.MuiPopover-paper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.MuiPopover-paper::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(71, 75, 99, 1) !important;
+}
+
+a {
+  text-decoration: none !important;
+}

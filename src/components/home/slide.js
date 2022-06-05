@@ -16,7 +16,13 @@ import {
 import { makeStyles } from "@mui/styles";
 import sliderImageOne from "../../assets/images/sliderOne.jpg";
 import sliderImageTwo from "../../assets/images/sliderTwo.jpg";
-import { renderInput, renderPhone, renderSelect } from "../formInput";
+import {
+  renderInput,
+  renderPhone,
+  renderSelect,
+  renderDate,
+  renderTime,
+} from "../formInput";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 import "yup-phone";
@@ -51,7 +57,10 @@ const Slide = () => {
     formData.append("phone", values.phone);
     formData.append("email", values.email);
     formData.append("apparel", values.apparel);
-    await post(`addAppoinment`, formData)
+    formData.append("date", values.date);
+    formData.append("time", values.time);
+
+    await post(`addApoinment`, formData)
       .then((res) => {
         handleClose();
         setName(values.name);
@@ -126,14 +135,18 @@ const Slide = () => {
             handleClose();
           }
         }}
+        fullWidth
+        maxWidth="lg"
       >
-        <DialogTitle>Book Appointment</DialogTitle>
+        <DialogTitle>Appointment Booking </DialogTitle>
         <Formik
           initialValues={{
             name: "",
             phone: "",
             email: "",
             apparel: "",
+            date: new Date(),
+            time: "",
           }}
           validationSchema={appoinmentSchema}
           onSubmit={(values, actions) => {
@@ -144,83 +157,201 @@ const Slide = () => {
           {(errors, props) => (
             <Form>
               <DialogContent>
-                <Grid container className={classes.formWrapper}>
-                  <Grid item xs={4}>
-                    <div>Name :</div>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Field
-                      name="name"
-                      type="text"
-                      className={classes.formControl}
-                      component={renderInput}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <ErrorMessage
-                      component="span"
-                      className="error"
-                      name="name"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <div>Phone :</div>
-                  </Grid>
+                <Grid container>
+                  <Grid item container xs={12}>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        container
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Name :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="name"
+                            type="text"
+                            variant="outlined"
+                            className={classes.formControl}
+                            component={renderInput}
+                          />
+                        </Grid>
+                      </Grid>
 
-                  <Grid item xs={8}>
-                    <Field
-                      name="phone"
-                      type="text"
-                      className={classes.formControlPhone}
-                      component={renderPhone}
-                    />
+                      <Grid item xs={12}>
+                        <ErrorMessage
+                          component="span"
+                          className="error"
+                          name="name"
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        container
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Email :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="email"
+                            type="text"
+                            variant="outlined"
+                            className={classes.formControl}
+                            component={renderInput}
+                          />
+                        </Grid>
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <ErrorMessage
+                          component="span"
+                          className="error"
+                          name="email"
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        container
+                        xs={12}
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Phone :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="phone"
+                            type="text"
+                            className={classes.formControlPhone}
+                            component={renderPhone}
+                          />
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <ErrorMessage
+                          component="span"
+                          className="error"
+                          name="phone"
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12}>
-                    <ErrorMessage
-                      component="span"
-                      className="error"
-                      name="phone"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <div>Email :</div>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Field
-                      name="email"
-                      type="text"
-                      className={classes.formControl}
-                      component={renderInput}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <ErrorMessage
-                      component="span"
-                      className="error"
-                      name="email"
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <div>Apparel Type :</div>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Field
-                      name="apparel"
-                      type="text"
-                      className={classes.formControlSelect}
-                      component={renderSelect}
-                    ></Field>
+                  <Grid item container xs={12}>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        container
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Date :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="date"
+                            className={classes.formControlSelect}
+                            component={renderDate}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        container
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Time :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="time"
+                            className={classes.formControlSelect}
+                            component={renderTime}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      md={6}
+                      className={classes.formWrapper}
+                    >
+                      <Grid
+                        item
+                        container
+                        xs={12}
+                        className={classes.formWrapper}
+                      >
+                        <Grid item xs={4}>
+                          <div>Apparel Type :</div>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Field
+                            name="apparel"
+                            label="Apparel Type"
+                            type="text"
+                            className={classes.formControlSelect}
+                            component={renderSelect}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
+                <DialogActions>
+                  <Button variant="outlined" onClick={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button variant="outlined" type="submit">
+                    Book Appointment
+                  </Button>
+                </DialogActions>
               </DialogContent>
-              <DialogActions>
-                <Button variant="outlined" onClick={handleClose}>
-                  Cancel
-                </Button>
-                <Button variant="outlined" type="submit">
-                  Book Appointment
-                </Button>
-              </DialogActions>
             </Form>
           )}
         </Formik>
@@ -239,12 +370,12 @@ const Slide = () => {
             Thanks {name} for booking appointment. <br />
             Our tailor will contact you soon
           </DialogContentText>
+          <DialogActions>
+            <Button variant="outlined" onClick={handleModalClose} autoFocus>
+              OK
+            </Button>
+          </DialogActions>
         </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleModalClose} autoFocus>
-            OK
-          </Button>
-        </DialogActions>
       </Dialog>
     </Box>
   );
@@ -338,6 +469,12 @@ const useStyles = makeStyles({
     border: "1px solid rgba(0, 0, 0, 0.23)",
     margin: "24px 0 !important",
     borderRadius: "10px !important",
+    "& .MuiInputBase-root": {
+      borderRadius: "10px !important",
+    },
+    "& fieldset": {
+      border: "0px !important",
+    },
   },
 });
 

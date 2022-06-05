@@ -1,7 +1,7 @@
 import { React } from "react";
 import { makeStyles } from "@mui/styles";
 import { useMediaQuery } from "react-responsive";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import imageOne from "../../assets/images/gridImageOne.jpg";
 import imageTwo from "../../assets/images/gridImageTwo.jpg";
 import imageThree from "../../assets/images/gridImageThree.jpg";
@@ -45,6 +45,7 @@ const Services = () => {
           {serviceData.map((item, key) => (
             <div key={key}>
               <img
+                alt={item.title}
                 src={item.image}
                 style={{ width: "80%", aspectRatio: "1/1" }}
               />
@@ -64,7 +65,11 @@ const Services = () => {
               className={classes.service}
             >
               <div className={classes.imageWrapper}>
-                <img src={item.image} className={classes.serviceImage} />
+                <img
+                  alt={item.title}
+                  src={item.image}
+                  className={classes.serviceImage}
+                />
               </div>
               <Typography variant="h4">{item.title}</Typography>
             </Grid>
