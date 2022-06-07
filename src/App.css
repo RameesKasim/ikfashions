@@ -67,7 +67,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .MuiPopover-paper {
-  height: 200px;
+  height: 220px;
   overflow: scroll;
 }
 
@@ -84,4 +84,8 @@ body::-webkit-scrollbar-thumb {
 
 a {
   text-decoration: none !important;
+}
+
+.MuiDrawer-paper {
+  background-color: rgb(44 86 129) !important;
 }

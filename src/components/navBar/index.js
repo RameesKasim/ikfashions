@@ -13,19 +13,22 @@ import {
   Toolbar,
   Button,
   IconButton,
+  Collapse,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "react-responsive";
-import { ArrowBack, ArrowRight, KeyboardArrowDown } from "@mui/icons-material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import companyLogo from "../../assets/images/logo/logo.png";
+import AppoinmentForm from "../common/appoinmentForm";
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [onMenu, setOnMenu] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
   const [menuWIdith, setMenuWIdith] = useState(0);
-  const [drawerWIdith, setDrawerWIdith] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [SecondDrawerOpen, setSecondDrawerOpen] = useState(false);
   const classes = useStyles();
@@ -37,7 +40,7 @@ const NavBar = () => {
     isMobile ? setMenuWIdith(0) : setMenuWIdith(ref.current.offsetWidth);
   }, [anchorEl]);
 
-  let scrollToBottom = (event) => {
+  const scrollToBottom = (event) => {
     event.preventDefault();
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -45,35 +48,59 @@ const NavBar = () => {
     });
   };
 
-  let openMenu = (event) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const openMenu = (event) => {
     event.preventDefault();
     setOpen(true);
   };
 
-  let closeMenu = (event) => {
+  const closeMenu = (event) => {
     event.preventDefault();
     setTimeout(() => {
       onMenu ? setOpen(true) : setOpen(false);
     }, 3000);
   };
 
-  let OnMenuItem = (event) => {
+  const OnMenuItem = (event) => {
     event.preventDefault();
     setOnMenu(true);
   };
 
-  let leaveMenuItem = (event) => {
+  const leaveMenuItem = (event) => {
     event.preventDefault();
     setOnMenu(false);
     setOpen(false);
   };
 
+  const formOpenStatus = (status) => {
+    setFormOpen(status);
+  };
+
+  const formButtonClick = (event) => {
+    event.preventDefault();
+    formOpenStatus(true);
+  };
+
   return (
     <AppBar position="sticky" color="primary" className={classes.navBar}>
       <Container maxWidth="xxl">
-        <Toolbar disableGutters>
+        {formOpen ? <AppoinmentForm status={formOpenStatus} /> : ""}
+        <Toolbar sx={{ backgroundColor: "rgb(44 95 146)" }} disableGutters>
           {isMobile ? (
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -87,6 +114,12 @@ const NavBar = () => {
               >
                 <MenuIcon />
               </IconButton>
+              <IconButton>
+                <img src={companyLogo} alt="logo" style={{ height: "16px " }} />
+              </IconButton>
+              <Button onClick={formButtonClick} className={classes.button}>
+                Book Appointment
+              </Button>
               <SwipeableDrawer
                 anchor="left"
                 open={drawerOpen}
@@ -99,6 +132,7 @@ const NavBar = () => {
                       <Link to="/">
                         <ListItemButton
                           onClick={() => {
+                            scrollToTop();
                             setDrawerOpen(false);
                           }}
                         >
@@ -121,14 +155,97 @@ const NavBar = () => {
                       <ListItemButton
                         onClick={(e) => {
                           e.preventDefault();
-                          setDrawerWIdith(drawerRef.current.offsetWidth);
-                          setSecondDrawerOpen(true);
+                          setSecondDrawerOpen(!SecondDrawerOpen);
                         }}
                       >
                         <ListItemText primary=" Custom Apparel" />
-                        <ArrowRight fontSize="small" />
+                        {SecondDrawerOpen ? (
+                          <ExpandLess sx={{ color: "#888888" }} />
+                        ) : (
+                          <ExpandMore sx={{ color: "#888888" }} />
+                        )}
                       </ListItemButton>
                     </ListItem>
+                    <Collapse
+                      in={SecondDrawerOpen}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List className={classes.menuList} sx={{ pl: 1.5 }}>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/suits">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary=" Suits" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/shirts">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary=" Shirts" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/blazers">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary=" Blazers" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/pants">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary=" Pants" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/bowties">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary=" Bow Ties" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ pl: 4 }} alignItems="center">
+                          <Link to="/apparels/vests">
+                            <ListItemButton
+                              onClick={() => {
+                                setSecondDrawerOpen(false);
+                                setDrawerOpen(false);
+                              }}
+                            >
+                              <ListItemText primary="Vests" />
+                            </ListItemButton>
+                          </Link>
+                        </ListItem>
+                      </List>
+                    </Collapse>
                     <ListItem>
                       <ListItemButton
                         onClick={() => {
@@ -144,130 +261,43 @@ const NavBar = () => {
                   </List>
                 </Box>
               </SwipeableDrawer>
-              <SwipeableDrawer
-                anchor="left"
-                open={SecondDrawerOpen}
-                onClose={() => setSecondDrawerOpen(false)}
-                onOpen={() => setSecondDrawerOpen(true)}
-              >
-                <Box sx={{ width: drawerWIdith }}>
-                  <List className={classes.menuList}>
-                    <ListItem alignItems="center">
-                      <ListItemButton
-                        onClick={() => {
-                          setSecondDrawerOpen(false);
-                        }}
-                      >
-                        <ArrowBack fontSize="small" />
-                        <ListItemText primary=" back" />
-                      </ListItemButton>
-                    </ListItem>
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/suits">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary=" Suits" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>{" "}
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/shirts">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary=" Shirts" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/blazers">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary=" Blazers" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/pants">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary=" Pants" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/bowties">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary=" Bow Ties" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>
-                    <ListItem alignItems="center">
-                      <Link to="/apparels/vests">
-                        <ListItemButton
-                          onClick={() => {
-                            setSecondDrawerOpen(false);
-                            setDrawerOpen(false);
-                          }}
-                        >
-                          <ListItemText primary="Vests" />
-                        </ListItemButton>
-                      </Link>
-                    </ListItem>
-                  </List>
-                </Box>
-              </SwipeableDrawer>
             </Box>
           ) : (
-            <Box sx={{ flexGrow: 1, display: "flex" }}>
-              <Link to="/">
-                <Button sx={{ m: 2, color: "white", display: "block" }}>
-                  Home
-                </Button>
-              </Link>
-              <Link to="/gallery">
-                <Button sx={{ m: 2, color: "white", display: "block" }}>
+            <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
+              <Button sx={{ m: 2, color: "white", display: "block" }}>
+                <img src={companyLogo} alt="Logo" style={{ width: "40px" }} />
+              </Button>
+              <Box sx={{ flexGrow: 1, display: "flex" }}>
+                <Button
+                  onClick={() => {
+                    // history.push("images");
+                  }}
+                  sx={{ m: 2, color: "white", display: "block" }}
+                >
                   Gallery
                 </Button>
-              </Link>
-              <Button
-                onClick={closeMenu}
-                onMouseEnter={(event) => {
-                  setAnchorEl(event.currentTarget);
-                  openMenu(event);
-                }}
-                onMouseLeave={closeMenu}
-                sx={{ m: 2, color: "white", display: "flex" }}
-                ref={ref}
-                endIcon={<KeyboardArrowDown fontSize="small" />}
-              >
-                Custom Apparel
-              </Button>
-              <Button
-                sx={{ m: 2, color: "white", display: "block" }}
-                onClick={scrollToBottom}
-              >
-                Contact Us
+                <Button
+                  onClick={closeMenu}
+                  onMouseEnter={(event) => {
+                    setAnchorEl(event.currentTarget);
+                    openMenu(event);
+                  }}
+                  onMouseLeave={closeMenu}
+                  sx={{ m: 2, color: "white", display: "flex" }}
+                  ref={ref}
+                  endIcon={open ? <ExpandLess /> : <ExpandMore />}
+                >
+                  Custom Apparel
+                </Button>
+                <Button
+                  sx={{ m: 2, color: "white", display: "block" }}
+                  onClick={scrollToBottom}
+                >
+                  Contact Us
+                </Button>
+              </Box>
+              <Button className={classes.largeButton} onClick={formButtonClick}>
+                Book Appointment
               </Button>
               <Menu
                 id="basic-menu"
@@ -335,6 +365,18 @@ const useStyles = makeStyles({
     "& span": {
       fontSize: ".875rem !important",
     },
+  },
+  button: {
+    fontWeight: "bold !important",
+    color: "black !important",
+    border: "1px solid black !important",
+    textTransform: " capitalize !important",
+  },
+  largeButton: {
+    textTransform: " capitalize !important",
+    padding: ".8rem",
+    color: "white !important",
+    border: "1px solid white !important",
   },
   menuList: {
     "& li": {

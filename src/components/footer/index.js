@@ -17,7 +17,12 @@ import * as Yup from "yup";
 import { post } from "../utils/apiController";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import BusinessIcon from "@mui/icons-material/Business";
-import { FacebookOutlined, Instagram, Twitter } from "@mui/icons-material";
+import {
+  FacebookOutlined,
+  Instagram,
+  Phone,
+  Twitter,
+} from "@mui/icons-material";
 
 const Footer = () => {
   const classes = useStyles();
@@ -53,10 +58,12 @@ const Footer = () => {
   };
 
   return (
-    <AppBar position="sticky" color="primary">
+    <AppBar position="sticky" sx={{ backgroundColor: "rgb(0, 30, 60)" }}>
       <Grid container spacing={3} className={classes.footerWrapper}>
         <Grid item container xs={5} sm={7}>
-          <Typography variant="h3">GIVE YOUR SUGGESTIONS</Typography>
+          <Typography variant="h6" sx={{ width: "100%" }}>
+            GIVE YOUR SUGGESTIONS
+          </Typography>
           <Formik
             initialValues={{
               name: "",
@@ -70,7 +77,7 @@ const Footer = () => {
             }}
           >
             {(errors, props) => (
-              <Form>
+              <Form className={classes.formWrapper}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Field
@@ -108,7 +115,7 @@ const Footer = () => {
                       type="text"
                       multiline
                       rows="2"
-                      fullwidth
+                      fullWidth
                       label="Your Suggestion"
                       variant="filled"
                       className={classes.formControl}
@@ -125,31 +132,25 @@ const Footer = () => {
             )}
           </Formik>
         </Grid>
-        <Grid item xs={6} sm={5}>
+        <Grid item xs={6} sm={5} sx={{ alignItems: "center" }}>
           <iframe
-            title="Map"
             className={classes.mapFrame}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.7428019909457!2d55.27517411501047!3d25.24558638387372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb3fafdf6ac06473c!2zMjXCsDE0JzQ0LjEiTiA1NcKwMTYnMzguNSJF!5e0!3m2!1sen!2sae!4v1653928914447!5m2!1sen!2sae"
-          ></iframe>
+            title="Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d473.64614780525767!2d55.276382624561954!3d25.24545973685825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43d0308dfb03%3A0xff648f06cb9128e2!2sWasl%20Port%20Views%20Building%209!5e0!3m2!1sen!2sae!4v1654505627397!5m2!1sen!2sae"
+          />
         </Grid>
       </Grid>
       <Grid container>
         <Paper className={classes.footerPaper}>
           <Grid container columns={12}>
             <Grid item container xs={12} sm={12} md={8}>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
+              <Grid item xs={6} sx={{ display: "flex", alignItems: "center" }}>
                 <span>
                   <BusinessIcon sx={{ paddingRight: ".8rem" }} />
                 </span>
                 <span>
                   <Typography
-                    variant="body2"
+                    variant="h6"
                     style={{
                       color: "white",
                       textAlign: "left",
@@ -167,13 +168,25 @@ const Footer = () => {
                   </Typography>
                 </span>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                className={classes.centerGrid}
-              ></Grid>
+              <Grid item xs={6} className={classes.centerGrid} display="flex">
+                <span>
+                  <a href="">
+                    <Typography variant="body2" className={classes.icon}>
+                      <Phone sx={{ paddingRight: ".5rem" }} fontSize="small" />
+                      {" +971 52 6476647 "}
+                    </Typography>
+                  </a>
+                  <a href="mailto:info@ikfashiondesigns.com">
+                    <Typography variant="body2" className={classes.icon}>
+                      <MailOutlineIcon
+                        sx={{ paddingRight: ".5rem" }}
+                        fontSize="small"
+                      />
+                      info@ikfashiondesigns.com
+                    </Typography>
+                  </a>
+                </span>
+              </Grid>
             </Grid>
             <Grid
               item
@@ -182,54 +195,35 @@ const Footer = () => {
               sm={12}
               md={4}
               className={classes.centerGrid}
-              sx={{ justifyContent: "right" }}
+              display="flex"
+              flexDirection="column"
             >
-              <a href="info@ikfashiondesigns.com">
-                <Typography
-                  variant="body2"
-                  style={{
-                    color: "white",
-                  }}
-                >
-                  <MailOutlineIcon
-                    sx={{ paddingRight: ".5rem" }}
-                    fontSize="small"
-                  />
-                </Typography>
-              </a>
-              <a href="info@ikfashiondesigns.com">
-                <Typography
-                  variant="body2"
-                  style={{
-                    color: "white",
-                  }}
-                >
-                  <FacebookOutlined
-                    sx={{ paddingRight: ".5rem" }}
-                    fontSize="small"
-                  />
-                </Typography>
-              </a>
-              <a href="">
-                <Typography
-                  variant="body2"
-                  style={{
-                    color: "white",
-                  }}
-                >
-                  <Instagram sx={{ paddingRight: ".5rem" }} fontSize="small" />
-                </Typography>
-              </a>
-              <a href="">
-                <Typography
-                  variant="body2"
-                  style={{
-                    color: "white",
-                  }}
-                >
-                  <Twitter sx={{ paddingRight: ".5rem" }} fontSize="small" />
-                </Typography>
-              </a>
+              <span className={classes.centerGrid}>
+                <a href="">
+                  <Typography variant="h6" className={classes.icon}>
+                    <FacebookOutlined
+                      sx={{ paddingRight: ".5rem" }}
+                      fontSize="small"
+                    />
+                  </Typography>
+                </a>
+                <a href="">
+                  <Typography variant="h6" className={classes.icon}>
+                    <Instagram
+                      sx={{ paddingRight: ".5rem" }}
+                      fontSize="small"
+                    />
+                  </Typography>
+                </a>
+                <a href="">
+                  <Typography variant="h6" className={classes.icon}>
+                    <Twitter sx={{ paddingRight: ".5rem" }} fontSize="small" />
+                  </Typography>
+                </a>
+              </span>
+              <span className={classes.subText}>
+                Get connected with us on social networks
+              </span>
             </Grid>
           </Grid>
         </Paper>
@@ -314,13 +308,13 @@ const useStyles = makeStyles({
     },
   },
   footerPaper: {
-    backgroundColor: "rgb(6 28 50) !important",
+    backgroundColor: "rgb(44 95 146) !important",
     boxShadow: "  1px 1px 1px 1px rgba(0, 1, 1, .2)  !important",
     margin: "2px 0 !important",
     width: "100%",
     color: "white !important",
     "@media (max-width:500px)": {
-      padding: "2rem 3rem 2rem 3rem",
+      padding: "2rem ",
     },
     "@media (min-width:500px)": {
       padding: "2rem 3rem 2rem 3rem",
@@ -335,6 +329,32 @@ const useStyles = makeStyles({
   centerGrid: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
+    "@media (max-width:500px)": {
+      marginTop: ".4rem !important",
+    },
+  },
+  formWrapper: {
+    "@media (max-width:500px)": {
+      overflow: "scroll",
+      height: "200px",
+    },
+  },
+  icon: {
+    padding: "0",
+    margin: "0 .5rem",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+  },
+  subText: {
+    textAlign: "center",
+    "@media (max-width:500px)": {
+      fontSize: ".6rem",
+    },
+    "@media (min-width:500px)": {
+      fontSize: ".8rem",
+    },
   },
 });
 

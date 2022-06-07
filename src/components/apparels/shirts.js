@@ -51,7 +51,7 @@ let collarStyleData = [
     desc: "The semi-spread collar is similar to the previous style but has a more casual look to it.\n This option is less stiff and is said to be suitable for tall men with longer necks.",
   },
   {
-    title: "The Cutaway Colla",
+    title: "The Cutaway Collar",
     image: cutawayCollar,
     desc: "The cutaway collar is one of the slightly shorter collars. This style includes a reduced collar length and wider ends\nIt’s not necessarily your best option for tie-wearing but rather provides a more casual look.",
   },
