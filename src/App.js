@@ -93,6 +93,22 @@ function App() {
           fontSize: "1.5rem",
         },
       },
+      h6: {
+        color: "white",
+        "@media (max-width:500px)": {
+          fontSize: ".6rem",
+          padding: "1rem 0",
+        },
+        "@media (min-width:500px)": {
+          fontSize: ".8rem",
+        },
+        "@media (min-width:900px)": {
+          fontSize: "1rem",
+        },
+        "@media (min-width:1200px)": {
+          fontSize: "1.2rem",
+        },
+      },
       body1: {
         color: "#888888",
         padding: "1rem 0",
@@ -124,7 +140,7 @@ function App() {
       },
     },
     palette: {
-      primary: { main: "rgb(0, 30, 60)" },
+      primary: { main: "rgb(44 95 146)" },
       secondary: { main: "#ffff" },
     },
   });
