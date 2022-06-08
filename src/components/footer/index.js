@@ -160,7 +160,7 @@ const Footer = () => {
                       alignItems: "center",
                     }}
                   >
-                    IKFASHONS
+                    IKFASHIONS
                     <br />
                     Wasl Port View 9, <br />
                     Shop 9, Al Mina Road,
@@ -283,9 +283,12 @@ const useStyles = makeStyles({
 
     "&  .MuiInputBase-root": {
       padding: "0rem",
+      color: "white !important",
+      margin: ".5rem 0",
     },
     "& textarea": {
       padding: "1rem",
+      margin: "1rem 0 ",
     },
     "& .MuiFilledInput-root": {
       maxWidth: "100% !important",

@@ -120,6 +120,7 @@ const Blazers = () => {
 
 const useStyles = makeStyles({
   blazersWrapper: {
+    position: "relative",
     "@media (max-width:500px)": {
       padding: "1rem",
     },

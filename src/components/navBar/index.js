@@ -19,7 +19,7 @@ import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "react-responsive";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import companyLogo from "../../assets/images/logo/logo.png";
 import AppoinmentForm from "../common/appoinmentForm";
 
@@ -35,6 +35,7 @@ const NavBar = () => {
   const ref = useRef(null);
   const drawerRef = useRef(null);
   const isMobile = useMediaQuery({ query: "(max-width: 480px)" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     isMobile ? setMenuWIdith(0) : setMenuWIdith(ref.current.offsetWidth);
@@ -86,6 +87,11 @@ const NavBar = () => {
     event.preventDefault();
     formOpenStatus(true);
   };
+  const menuEnter = (event) => {
+    event.preventDefault();
+    setOpen(false);
+    setOnMenu(false);
+  };
 
   return (
     <AppBar position="sticky" color="primary" className={classes.navBar}>
@@ -114,7 +120,12 @@ const NavBar = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <IconButton>
+              <IconButton
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate("/");
+                }}
+              >
                 <img src={companyLogo} alt="logo" style={{ height: "16px " }} />
               </IconButton>
               <Button onClick={formButtonClick} className={classes.button}>
@@ -264,13 +275,19 @@ const NavBar = () => {
             </Box>
           ) : (
             <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
-              <Button sx={{ m: 2, color: "white", display: "block" }}>
+              <Button
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate("/");
+                }}
+                sx={{ m: 2, color: "white", display: "block" }}
+              >
                 <img src={companyLogo} alt="Logo" style={{ width: "40px" }} />
               </Button>
               <Box sx={{ flexGrow: 1, display: "flex" }}>
                 <Button
                   onClick={() => {
-                    // history.push("images");
+                    navigate("/gallery");
                   }}
                   sx={{ m: 2, color: "white", display: "block" }}
                 >
@@ -312,6 +329,7 @@ const NavBar = () => {
                   "aria-labelledby": "basic-button",
                   onMouseEnter: OnMenuItem,
                   onMouseLeave: leaveMenuItem,
+                  onMouseDown: menuEnter,
                 }}
               >
                 <Link to="/apparels/suits">
